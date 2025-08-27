@@ -1,8 +1,4 @@
-Claro, Nelson! Aqui está o conteúdo completo em **Markdown**, pronto para copiar e colar no seu repositório como `README.md`:
 
----
-
-```markdown
 # 🧠 RAG Open Source com Ollama, ChromaDB e LangChain
 
 Este projeto implementa um pipeline de Recuperação Aumentada por Geração (RAG) utilizando tecnologias open source para criar uma aplicação de IA local, privada e extensível. Ele integra:
