@@ -1,0 +1,11 @@
+langchain
+langchain-community
+sentence-transformers
+chromadb
+streamlit
+requests
+pypdf # ler arqvuivos .pdf
+# unstructured # ler arquivos .docx
+langchain-ollama
+langchain-huggingface
+langchain-chroma

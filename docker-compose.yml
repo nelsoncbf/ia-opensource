@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  ollama:
+    build:
+      context: .
+      dockerfile: Dockerfile.ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: unless-stopped
+
+  # chromadb:
+    # image: chromadb/chroma:latest
+    # ports:
+      # - "8000:8000"
+    # volumes:
+      # - ./chroma:/chroma
+    # restart: unless-stopped
+# 
+  # app:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.app
+  #   ports:
+  #     - "8501:8501"
+  #   volumes:
+  #     - ./data:/app/data
+  #     - ./chroma:/app/chroma
+  #   depends_on:
+  #     - ollama
+  #     - chromadb
+
+volumes:
+  ollama_data:

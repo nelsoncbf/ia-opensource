@@ -1,0 +1,10 @@
+FROM ollama/ollama:latest
+
+# Nome do modelo que queremos garantir
+ENV MODEL_NAME=llama3
+RUN set -e
+RUN apt update && apt install curl -y
+RUN curl -fsSL https://ollama.com/install.sh | sh
+RUN ollama list
+
+CMD ["ollama", "run", "llama3"]
