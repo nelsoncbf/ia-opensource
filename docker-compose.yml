@@ -5,32 +5,49 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.ollama
+    entrypoint: ollama serve
     ports:
       - "11434:11434"
     volumes:
       - ollama_data:/root/.ollama
+    # environments:
+    #   - OLLAMA_HOST=0.0.0.0:8501
     restart: unless-stopped
+    networks:
+      - default
 
-  # chromadb:
-    # image: chromadb/chroma:latest
-    # ports:
-      # - "8000:8000"
-    # volumes:
-      # - ./chroma:/chroma
-    # restart: unless-stopped
-# 
-  # app:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile.app
-  #   ports:
-  #     - "8501:8501"
-  #   volumes:
-  #     - ./data:/app/data
-  #     - ./chroma:/app/chroma
-  #   depends_on:
-  #     - ollama
-  #     - chromadb
+  chromadb:
+    image: chromadb/chroma:latest
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./chroma:/chroma
+    restart: unless-stopped
+    networks:
+      - default
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data:/app/data
+      - ./chroma:/app/chroma
+    depends_on:
+      - ollama
+      - chromadb
+    # environment:
+      # - OLLAMA_BASE_URL=http://ollama:11434
+    networks:
+      - default
 
 volumes:
   ollama_data:
+
+networks:
+  default:
+    name: observability
+    driver: bridge
+    external: true

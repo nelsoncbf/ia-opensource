@@ -1,2 +1,3 @@
-data/*.*
-chroma/*.*
+.data/
+.chroma/
+*.bin

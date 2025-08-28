@@ -1,10 +1,20 @@
+# Usa a imagem oficial do Ollama como base
 FROM ollama/ollama:latest
 
-# Nome do modelo que queremos garantir
-ENV MODEL_NAME=llama3
-RUN set -e
-RUN apt update && apt install curl -y
-RUN curl -fsSL https://ollama.com/install.sh | sh
-RUN ollama list
+# Define o nome do modelo que será baixado
+# 🔄 Você pode trocar "mistral" por outro modelo disponível:
+# - gemma
+# - llama2
+# - llama3
+# - phi
+# - codellama
+ENV MODEL_NAME mistrall
 
-CMD ["ollama", "run", "llama3"]
+COPY entrypoint-ollama.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
+
+
+# Inicia o servidor Ollama para uso via API REST
+# CMD ["ollama", "serve"]

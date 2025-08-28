@@ -1,9 +1,10 @@
-FROM python:3.11-slim
+FROM rag-opensource-app:latest
+#python:3.11-slim
 
 WORKDIR /app
 
-COPY requirements.txt .
-RUN pip install -r requirements.txt 
+#COPY requirements.txt .
+#RUN pip install -r requirements.txt 
 # --no-cache-dir 
 
 COPY app/* .
